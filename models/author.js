@@ -9,7 +9,7 @@ let AuthorSchema = new Schema({
   date_of_death: { type: Date },
 });
 
-AuthorSchema.virtual('name').get(() => {
+AuthorSchema.virtual('name').get(function () {
   let fullname = '';
   if (this.first_name && this.family_name) {
     fullname = `${this.family_name}, ${this.first_name}`;
@@ -19,10 +19,11 @@ AuthorSchema.virtual('name').get(() => {
     fullname = '';
   }
 
+  console.log(fullname);
   return fullname;
 });
 
-AuthorSchema.virtual('lifespan').get(() => {
+AuthorSchema.virtual('lifespan').get(function () {
   let lifetime_string = '';
 
   lifetime_string = `${
