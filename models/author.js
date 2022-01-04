@@ -26,14 +26,18 @@ AuthorSchema.virtual('name').get(function () {
 AuthorSchema.virtual('lifespan').get(function () {
   let lifetime_string = '';
 
-  lifetime_string = `${
-    this.date_of_birth ?? this.date_of_birth.getYear().toString()
-  } - ${this.date_of_death ?? this.date_of_death.getYear().toString()}`;
+  if (this.date_of_birth || this.date_of_death) {
+    lifetime_string = `(${
+      this.date_of_birth ? this.date_of_birth.getFullYear().toString() : ''
+    } - ${
+      this.date_of_death ? this.date_of_death.getFullYear().toString() : ''
+    })`;
+  }
 
   return lifetime_string;
 });
 
-AuthorSchema.virtual('url').get(() => {
+AuthorSchema.virtual('url').get(function () {
   return `/catalog/author/${this._id}`;
 });
 
