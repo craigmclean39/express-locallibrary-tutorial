@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head.ejs'); %>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2"><%- include('./partials/sidebar.ejs') %></div>
+        <div class="col-sm-10">
+          <h1><%= title %></h1>
+
+          <p><strong>Author:</strong><a href="<%=book.author.url %>"><%= ` ${book.author.name}` %></a></p>
+
+          <p><strong>Summary:</strong><%= ` ${book.summary}` %></p>
+          <p><strong>ISBN:</strong><%= ` ${book.isbn}` %></p>
+          <% if(book.genre.length > 0) { %>
+          <p><strong>Genre:</strong>
+            <ul>
+              <% book.genre.forEach((genre) => { %> 
+                <li><a href="<%= genre.url %>"><%= genre.name %></a></li>
+                <% }); %>
+            </ul>
+          </p>
+          <% } %>
+
+          <div style="margin-left: 20px; margin-top: 20px"></div>
+          <h4>Copies</h4>
+          <% if(book_instances.length > 0) { %>
+            <% book_instances.forEach((instance) => { %> 
+              <hr>
+              <% if(instance.status == 'Available') { %>
+                <p class="text-success"><%= instance.status %></p>
+              <% } else if(instance.status == 'Maintenance') { %>
+                <p class="text-danger"><%= instance.status %></p>
+              <% } else { %>
+                <p class="text-warning"><%= instance.status %></p>
+                <% } %>
+              <p><strong>Imprint:</strong><%= ` ${instance.imprint}` %></p>
+              <% if(instance.status != 'Available') { %>
+
+                <p><strong>Due Back:</strong><%= ` ${instance.due_back_formatted}` %></p>
+              <% } %>
+              <p><strong>Id:</strong><a href="<%= instance.url %>"><%= instance._id %></a></p>
+            <% }); %>
+            <% } else { %>
+          
+            <p>There are no copies of this book in the library.</p>
+          <%}%>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
