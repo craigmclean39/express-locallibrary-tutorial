@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head.ejs'); %>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2"><%- include('./partials/sidebar.ejs') %></div>
+        <div class="col-sm-10">
+          <h1>Author: <%= author.name %></h1>
+          <p><%= author.lifespan %></p>
+          <div style="margin-left: 20px; margin-top: 20px;">
+          <h4>Books</h4>
+          <% if(author_books.length > 0) { %>
+          
+            <dl>
+            <% author_books.forEach(book => { %>
+              
+              <dt>
+                <a href="<%= book.url %>"><%= book.title %></a>
+              </dt>
+              <dd><%= book.summary %></dd>
+
+            <% }); %>
+
+            </dl>
+          <% } else { %>
+          
+            <p>This author has no books.</p>
+          <%}%>
+          
+          </div>
+
+     
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
