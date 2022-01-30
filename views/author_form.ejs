@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head.ejs'); %>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2"><%- include('./partials/sidebar.ejs') %></div>
+        <div class="col-sm-10">
+          <h1><%= title %></h1>
+          <form action="" method="post">
+
+            <div class="form-group">
+              <label for="first_name">First Name:</label>
+              <input class="form-control" type="text"  placeholder="First name (given)" required name='first_name' value=<%= locals.author ? author.first_name : '' %> > 
+
+              <label for="family_name">Family Name:</label>
+              <input class="form-control" type="text"  placeholder="Family name (surname)" required name='family_name' > 
+
+            </div>
+            <div class='form-group'>
+
+              <label for="date_of_birth">Date of birth:</label>
+              <input type="date" name="date_of_birth" class='form-control' value=<% locals.author ? author.date_of_birth : ""  %>>
+
+              <label for="date_of_death">Date of Death:</label>
+              <input type="date" name="date_of_death" class='form-control' value=<% locals.author ? author.date_of_death : ""  %>>
+
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+
+          <% if(locals.errors) { %>
+
+            <ul>
+              <% locals.errors.forEach(err => { %>
+
+                <li><%= err.msg %></li>
+
+              <% }) %>
+            </ul>
+
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
