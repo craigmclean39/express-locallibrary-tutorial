@@ -18,8 +18,6 @@ AuthorSchema.virtual('name').get(function () {
   if (!this.first_name || !this.family_name) {
     fullname = '';
   }
-
-  console.log(fullname);
   return fullname;
 });
 
