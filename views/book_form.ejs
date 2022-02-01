@@ -13,7 +13,7 @@
 
             <div class="form-group">
               <label for="title">Title:</label>
-              <input class="form-control" type="text"  placeholder="Name of book" required name='title' value=<%= locals.book ? locals.book.title : '' %> > 
+              <input class="form-control" type="text"  placeholder="Name of book" required name='title' <%- locals.book ? `value="${book.title}"` : '' %> > 
             </div>
 
             <div class="form-group">
@@ -28,10 +28,10 @@
                 <% authors.forEach((author) => { %> 
 
                   <% if(locals.book) { %>
-                    <option value=<%= author._id%>   <%= (author._id.toString() === book.author._id.toString() ? "selected" : "")  %>> <%= author.name%> </option>
+                    <option value=<%= author._id%>   <%= (((author._id.toString() === book.author._id.toString()) || author._id.toString() === book.author) ? "selected" : "")  %>> <%= author.name%> </option>
                     <% } else { %>
                     
-                      <option value=<%- author._id%>><%- author.name%></option>
+                      <option value=<%- author._id%>><%= author.name%></option>
                     
                     <%}%>
                   <% }); %>
@@ -46,7 +46,7 @@
 
             <div class="form-group">
               <label for="isbn">ISBN:</label>
-              <input type="text" name="isbn" class="form-control" placeholder="ISBN13" value= <% locals.book ? book.isbn : ''%>>
+              <input type="text" name="isbn" class="form-control" placeholder="ISBN13" value= <%= locals.book ? book.isbn : ''%>>
             </div>
 
             <div class="form-group">
