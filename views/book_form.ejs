@@ -20,6 +20,11 @@
               <label for="author">Author</label>
               <select name="author" class="form-control">
 
+                <%# Sort authors alphabetically by last name %> 
+                <% authors.sort((a, b)=> { %>
+                  <% return (a.family_name.toUpperCase() < b.family_name.toUpperCase()) ? -1 : (a.family_name.toUpperCase() > b.family_name.toUpperCase()) ? 1 : 0 %> 
+                <% }); %>   
+
                 <% authors.forEach((author) => { %> 
 
                   <% if(locals.book) { %>
