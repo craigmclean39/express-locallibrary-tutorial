@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const dotenv = require('dotenv');
+dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,9 +13,11 @@ let catalogRouter = require('./routes/catalog');
 var app = express();
 
 //Set up mongoose connection
+
 var mongoose = require('mongoose');
-var mongoDB =
-  'mongodb+srv://m001-student:m001-mongodb-basics@sandbox.1gheh.mongodb.net/local_library?retryWrites=true&w=majority';
+const login = process.env.MONGODB_LOGIN;
+console.log(login);
+var mongoDB = `mongodb+srv://${login}@sandbox.1gheh.mongodb.net/local_library?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
